@@ -1,0 +1,45 @@
+<view class="root">
+  <swiper duration="300" bindchange="changeSwiper" current="{{current}}" circular="{{circular}}" vertical>
+    <block wx:for="{{videoList}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
+      <swiper-item>
+        <video id="{{'myVideo_' + index}}" src="{{item.url}}" object-fit="cover" loop='{{true}}' custom-cache="{{true}}" autoplay='{{false}}'
+        controls='{{false}}' show-progress="{{true}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" 
+        show-center-play-btn="{{fasle}}" enable-progress-gesture="{{false}}" data-index="{{index}}" catchtap="playOrPause"></video>        
+        <!-- 点赞 转发 -->
+        <view class="action">
+          <view class="wrap">
+            <!-- <view class="isLike ? 'heart1' : 'heart'" bindtap="switchIsLike"></view> 会失去动画效果 -->
+            <block wx:if="{{isLike}}">
+              <view class="heart1" bindtap="switchIsLike"></view>
+            </block>
+            <block wx:else>
+              <view class="heart" bindtap="switchIsLike"></view>
+            </block>
+            <text>688</text>
+          </view>
+          <view class="wrap">
+            <image class="action-btn not-like" src="/images/share.png" mode="widthFix"></image>
+            <text>288</text>
+          </view>
+        </view>
+        <!-- 内容 -->
+        <view class="info">
+          <view class="header">
+            <image class="avatar" src="https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=348555030,881225398&fm=26&gp=0.jpg"></image>
+            <view class="name">{{item.data.staff}}</view>
+          </view>
+          <view class="content">
+            3年从业经验，妥善照顾好每一位新生儿妈妈，给您一个非常愉快的月子期，远离烦恼，让您恢复完美S型身材，给您最贴心的服务，让您的心情美美哒
+          </view>
+          <view style="margin-bottom: {{systemInfo.safeArea.bottom - systemInfo.safeArea.height}}px">
+            <view class="checkBtn">了解或预约</view>
+          </view>
+        </view>
+        <!-- 暂停 -->
+        <view wx:if="{{!isPlaying}}" data-index="{{index}}" bindtap="playOrPause">
+          <image src="/images/pause.png" class="pause" mode="widthFix"></image>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
